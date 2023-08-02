@@ -1,18 +1,20 @@
 import Icon from 'react-native-vector-icons/Ionicons';
 import Loading from 'components/loading/Loading';
 import PokemonListRenderItem from 'components/pokemon-list-screen/RenderItem';
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {FlatList, TouchableOpacity, View} from 'react-native';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {useNavigation} from '@react-navigation/native';
 import useFetchData, {
   Result,
 } from 'components/pokemon-list-screen/hooks/useFetchData';
+import SearchInput from 'components/search-input/SearchInput';
 
 const PokemonListScreen = () => {
   const navigation =
     useNavigation<StackNavigationProp<MainStackNavigatorParamList>>();
   const {data, loading, getData, handleGetMoreData} = useFetchData();
+  const [keyword, setKeyword] = useState('');
 
   const renderItem = ({item}: {item: Result}) => {
     return (
@@ -38,9 +40,17 @@ const PokemonListScreen = () => {
   if (loading) return <Loading />;
   return (
     <View style={{flex: 1}}>
+      <View style={{padding: 20}}>
+        <SearchInput onChangeText={setKeyword} />
+      </View>
+
       <FlatList
-        contentContainerStyle={{padding: 20}}
-        data={data?.results || []}
+        contentContainerStyle={{paddingHorizontal: 20}}
+        data={
+          data?.results?.filter(val =>
+            val?.name?.toLowerCase()?.match(keyword?.toLowerCase()),
+          ) || []
+        }
         keyExtractor={(_, i) => `index_${i}`}
         renderItem={renderItem}
         numColumns={2}
