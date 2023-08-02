@@ -21,7 +21,7 @@ function App(): JSX.Element {
     <NavigationContainer>
       <StatusBar
         barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-        backgroundColor={'white'}
+        backgroundColor={'orange'}
       />
       <MainStackNavigator />
     </NavigationContainer>
