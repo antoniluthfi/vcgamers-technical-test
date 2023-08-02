@@ -7,7 +7,13 @@ const Stack = createNativeStackNavigator<MainStackNavigatorParamList>();
 
 const MainStackNavigator = () => {
   return (
-    <Stack.Navigator initialRouteName="PokemonList">
+    <Stack.Navigator
+      initialRouteName="PokemonList"
+      screenOptions={{
+        headerStyle: {
+          backgroundColor: 'orange',
+        },
+      }}>
       <Stack.Screen
         name="PokemonList"
         component={PokemonListScreen}
