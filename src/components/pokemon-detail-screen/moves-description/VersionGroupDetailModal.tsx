@@ -46,8 +46,8 @@ const VersionGroupDetailModal: FC<VersionGroupDetailModalProps> = ({
 
           <ScrollView>
             {!!values &&
-              values.map(val => (
-                <View style={styles.valueContainer}>
+              values.map((val, i) => (
+                <View style={styles.valueContainer} key={`index_${i}`}>
                   <RowDescription
                     description="Level yang Dipelajari pada"
                     value={val?.level_learned_at}
@@ -108,7 +108,7 @@ const styles = StyleSheet.create({
     fontWeight: '500',
     color: 'black',
     marginBottom: 10,
-    fontSize: 16
+    fontSize: 16,
   },
   button: {
     backgroundColor: 'orange',
