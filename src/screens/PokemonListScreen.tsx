@@ -2,13 +2,13 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import Loading from 'components/loading/Loading';
 import PokemonListRenderItem from 'components/pokemon-list-screen/RenderItem';
 import React, {useEffect, useState} from 'react';
+import SearchInput from 'components/search-input/SearchInput';
 import {FlatList, TouchableOpacity, View} from 'react-native';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {useNavigation} from '@react-navigation/native';
 import useFetchData, {
   Result,
 } from 'components/pokemon-list-screen/hooks/useFetchData';
-import SearchInput from 'components/search-input/SearchInput';
 
 const PokemonListScreen = () => {
   const navigation =
@@ -30,7 +30,7 @@ const PokemonListScreen = () => {
   useEffect(() => {
     navigation.setOptions({
       headerRight: () => (
-        <TouchableOpacity onPress={getData}>
+        <TouchableOpacity onPress={getData} style={{marginRight: 20}}>
           <Icon name="reload" size={30} color="black" />
         </TouchableOpacity>
       ),
