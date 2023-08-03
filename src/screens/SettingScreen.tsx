@@ -1,10 +1,11 @@
+import DarkModaSwitcher from 'components/setting-screen/DarkModaSwitcher';
 import React from 'react';
-import {Text, View} from 'react-native';
+import {View} from 'react-native';
 
 const SettingScreen = () => {
   return (
-    <View>
-      <Text>Test</Text>
+    <View style={{padding: 20}}>
+      <DarkModaSwitcher />
     </View>
   );
 };
