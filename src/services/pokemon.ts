@@ -9,3 +9,13 @@ export const getPokemonList = async (url: string = 'https://pokeapi.co/api/v2/po
     return null;
   }
 }
+
+export const getPokemonDetails = async (name: string) => {
+  try {
+    const res = await interceptor.get(`https://pokeapi.co/api/v2/pokemon/${name}`)
+    return res.data;
+  } catch (error) {
+    console.warn(error);
+    return null;
+  }
+}
