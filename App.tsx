@@ -1,7 +1,7 @@
 import MainStackNavigator from './src/navigator/MainStackNavigator';
 import React from 'react';
-import {Colors} from 'react-native/Libraries/NewAppScreen';
 import {NavigationContainer} from '@react-navigation/native';
+import {RecoilRoot} from 'recoil';
 import {StatusBar, useColorScheme} from 'react-native';
 /**
  * Sample React Native App
@@ -13,17 +13,15 @@ import {StatusBar, useColorScheme} from 'react-native';
 function App(): JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
 
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
-
   return (
     <NavigationContainer>
       <StatusBar
         barStyle={isDarkMode ? 'light-content' : 'dark-content'}
         backgroundColor={'orange'}
       />
-      <MainStackNavigator />
+      <RecoilRoot>
+        <MainStackNavigator />
+      </RecoilRoot>
     </NavigationContainer>
   );
 }
