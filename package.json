@@ -8,7 +8,9 @@
     "lint": "eslint .",
     "start": "react-native start",
     "test": "jest",
-    "clean": "cd android && gradlew clean && cd .."
+    "clean": "cd android && gradlew clean && cd ..",
+    "build": "cd android && gradlew assembleRelease && cd ..",
+    "genkey": "keytool -genkey -v -keystore vcgamers_tehcnical_test.keystore -alias vcgamers_technical_test -keyalg RSA -keysize 2048 -validity 10000"
   },
   "dependencies": {
     "@react-navigation/bottom-tabs": "^6.5.8",
