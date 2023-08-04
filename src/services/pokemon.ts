@@ -19,3 +19,20 @@ export const getPokemonDetails = async (name: string) => {
     return null;
   }
 }
+
+export const getEvolvechain = async (urlSpecies: string) => {
+  try {
+    const species = await interceptor.get(urlSpecies);
+
+    const evolveChainUrl = (species.data as SpeciesData)?.evolution_chain?.url;
+    if (!!evolveChainUrl) {
+      const evolveChain = await interceptor.get(evolveChainUrl);
+      return evolveChain.data;
+    }
+
+    throw new Error('error');
+  } catch (error) {
+    console.warn(error);
+    return null;
+  }
+}

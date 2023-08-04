@@ -12,6 +12,7 @@ import {StackNavigationProp} from '@react-navigation/stack';
 import {themeSelector} from 'services/global-state/theme';
 import {useRecoilValue} from 'recoil';
 import {useTranslation} from 'react-i18next';
+import EvolveChainDescription from 'components/pokemon-detail-screen/EvolveChainDescription';
 
 const PokemonDetailScreen = () => {
   const route =
@@ -59,6 +60,7 @@ const PokemonDetailScreen = () => {
             data?.moves?.length > 10 ? data?.moves?.slice(0, 10) : data?.moves
           }
         />
+        <EvolveChainDescription urlSpecies={data?.species?.url} />
       </View>
     </ScrollView>
   );

@@ -19,5 +19,10 @@
     "action": "Action",
     "level_learned_at": "Level Learned at",
     "version_group": "Version Group",
-    "move_learn_method": "Move Learn Method"
+    "move_learn_method": "Move Learn Method",
+    "evolution_chain": "Rantai Evolusi",
+    "baby": "Baby",
+    "min_level": "Level",
+    "yes": "Yes",
+    "no": "No"
 }

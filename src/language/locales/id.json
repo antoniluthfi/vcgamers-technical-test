@@ -19,5 +19,10 @@
     "action": "Aksi",
     "level_learned_at": "Level yang Dipelajari pada",
     "version_group": "Grup Versi",
-    "move_learn_method": "Metode Belajar Bergerak"
+    "move_learn_method": "Metode Belajar Bergerak",
+    "evolution_chain": "Evolution Chain",
+    "baby": "Bayi",
+    "min_level": "Level",
+    "yes": "Ya",
+    "no": "Tidak"
 }
