@@ -1,4 +1,6 @@
 import React, {FC, useState} from 'react';
+import {themeSelector} from 'services/global-state/theme';
+import {useRecoilValue} from 'recoil';
 import {
   Image,
   Modal,
@@ -13,6 +15,7 @@ type SpritesDescriptionProps = {
 };
 
 const SpritesDescription: FC<SpritesDescriptionProps> = ({sprites}) => {
+  const theme = useRecoilValue(themeSelector);
   const [modalVisible, setModalVisible] = useState(false);
   const [description, setDescription] = useState('');
   const [value, setValue] = useState('');
@@ -54,13 +57,15 @@ const SpritesDescription: FC<SpritesDescriptionProps> = ({sprites}) => {
 
   return (
     <View>
-      <Text style={styles.title}>Sprites</Text>
+      <Text style={[styles.title, {color: theme.text}]}>Sprites</Text>
 
       {data.map((d, i) => (
         <View style={styles.descriptionContainer} key={`index_${i}`}>
-          <Text style={styles.description}>{d.title}</Text>
+          <Text style={[styles.description, {color: theme.text}]}>
+            {d.title}
+          </Text>
           <TouchableOpacity onPress={d.onPress}>
-            <Text style={{color: 'black'}}>
+            <Text style={{color: theme.text}}>
               : <Text style={styles.value}>Lihat Gambar</Text>
             </Text>
           </TouchableOpacity>
@@ -73,8 +78,14 @@ const SpritesDescription: FC<SpritesDescriptionProps> = ({sprites}) => {
         statusBarTranslucent
         visible={modalVisible}>
         <View style={styles.centeredView}>
-          <View style={styles.modalView}>
-            <Text style={styles.modalText}>{description}</Text>
+          <View
+            style={[
+              styles.modalView,
+              {backgroundColor: theme.background, borderColor: theme.border},
+            ]}>
+            <Text style={[styles.modalText, {color: theme.text}]}>
+              {description}
+            </Text>
             <Image
               source={{uri: value}}
               style={{width: 100, height: 100}}
@@ -104,8 +115,8 @@ const styles = StyleSheet.create({
     width: '90%',
     marginLeft: 20,
   },
-  title: {fontWeight: 'bold', color: 'black'},
-  description: {flexBasis: '50%', fontWeight: '500', color: 'black'},
+  title: {fontWeight: 'bold'},
+  description: {flexBasis: '50%', fontWeight: '500'},
   value: {
     color: 'blue',
     textDecorationColor: 'blue',
@@ -133,11 +144,11 @@ const styles = StyleSheet.create({
     shadowRadius: 4,
     elevation: 5,
     width: '60%',
+    borderWidth: 1,
   },
   modalText: {
     textAlign: 'center',
     fontWeight: '500',
-    color: 'black',
   },
   button: {
     backgroundColor: 'orange',

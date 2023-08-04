@@ -1,12 +1,16 @@
 import React, {FC, useMemo} from 'react';
 import {Row, Rows, Table} from 'react-native-table-component';
 import {StyleSheet, Text, View} from 'react-native';
+import {themeSelector} from 'services/global-state/theme';
+import {useRecoilValue} from 'recoil';
 
 type TypesDescriptionProps = {
   types: Types[];
 };
 
 const TypesDescription: FC<TypesDescriptionProps> = ({types}) => {
+  const theme = useRecoilValue(themeSelector);
+
   const tableHead = ['No', 'Nama', 'Slot'];
   const tableData = useMemo(() => {
     if (types?.length) {
@@ -18,9 +22,9 @@ const TypesDescription: FC<TypesDescriptionProps> = ({types}) => {
 
   return (
     <View>
-      <Text style={styles.title}>Jenis</Text>
+      <Text style={[styles.title, {color: theme.text}]}>Jenis</Text>
 
-      <Table borderStyle={{borderWidth: 2, borderColor: '#c8e1ff'}}>
+      <Table borderStyle={{borderWidth: 2, borderColor: theme.tableBorder}}>
         <Row
           data={tableHead}
           style={styles.head}
@@ -29,7 +33,7 @@ const TypesDescription: FC<TypesDescriptionProps> = ({types}) => {
         />
         <Rows
           data={tableData}
-          textStyle={styles.tableData}
+          textStyle={[styles.tableData, {color: theme.text}]}
           flexArr={[1, 4, 2]}
           heightArr={Array.from({length: tableData.length}, () => 50)}
         />
@@ -43,5 +47,5 @@ export default TypesDescription;
 const styles = StyleSheet.create({
   head: {height: 40, backgroundColor: '#f1f8ff'},
   tableData: {marginVertical: 5, marginLeft: 5, textAlign: 'center'},
-  title: {fontWeight: 'bold', color: 'black', marginBottom: 5},
+  title: {fontWeight: 'bold', marginBottom: 5},
 });

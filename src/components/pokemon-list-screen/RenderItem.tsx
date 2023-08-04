@@ -1,41 +1,29 @@
 import React from 'react';
 import useRandomThumbnailPicker from './hooks/useRandomThumbnailPicker';
-import {Image, Text, TouchableOpacity, View} from 'react-native';
+import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {Result} from './hooks/useFetchData';
+import {themeSelector} from 'services/global-state/theme';
+import {useRecoilValue} from 'recoil';
 
 type PokemonListRenderItemProps = {item: Result; onPress: () => void};
 
 const PokemonListRenderItem = ({item, onPress}: PokemonListRenderItemProps) => {
   const {image} = useRandomThumbnailPicker();
+  const theme = useRecoilValue(themeSelector);
 
   return (
-    <TouchableOpacity
-      style={{
-        width: '49%',
-        backgroundColor: 'white',
-        borderWidth: 1,
-        borderRadius: 7,
-        borderColor: 'grey',
-        elevation: 4,
-        marginBottom: 10,
-        shadowColor: 'rgba(0, 0, 0, 0.25)',
-        overflow: 'hidden',
-      }}
-      onPress={onPress}>
-      <Image
-        source={image}
-        style={{width: '100%', height: 150}}
-        resizeMode="contain"
-      />
+    <TouchableOpacity style={styles.container} onPress={onPress}>
+      <Image source={image} style={styles.image} resizeMode="contain" />
 
-      <View style={{width: '100%', backgroundColor: 'orange', padding: 20}}>
+      <View
+        style={[styles.titleContainer, {backgroundColor: theme.background}]}>
         <Text
-          style={{
-            textTransform: 'capitalize',
-            color: 'black',
-            fontWeight: 'bold',
-            fontSize: 16,
-          }}>
+          style={[
+            styles.title,
+            {
+              color: theme.text,
+            },
+          ]}>
           {item.name}
         </Text>
       </View>
@@ -44,3 +32,24 @@ const PokemonListRenderItem = ({item, onPress}: PokemonListRenderItemProps) => {
 };
 
 export default PokemonListRenderItem;
+
+const styles = StyleSheet.create({
+  container: {
+    width: '49%',
+    backgroundColor: 'white',
+    borderWidth: 1,
+    borderRadius: 7,
+    borderColor: 'grey',
+    elevation: 4,
+    marginBottom: 10,
+    shadowColor: 'rgba(0, 0, 0, 0.25)',
+    overflow: 'hidden',
+  },
+  image: {width: '100%', height: 150},
+  titleContainer: {width: '100%', padding: 20},
+  title: {
+    textTransform: 'capitalize',
+    fontWeight: 'bold',
+    fontSize: 16,
+  },
+});

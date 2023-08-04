@@ -16,6 +16,8 @@ import {
   TableWrapper,
 } from 'react-native-table-component';
 import RowDescription from '../RowDescription';
+import {themeSelector} from 'services/global-state/theme';
+import {useRecoilValue} from 'recoil';
 
 type VersionGroupDetailModalProps = {
   visible: boolean;
@@ -33,6 +35,8 @@ const VersionGroupDetailModal: FC<VersionGroupDetailModalProps> = ({
   description,
   values,
 }) => {
+  const theme = useRecoilValue(themeSelector);
+
   return (
     <Modal
       animationType="slide"
@@ -41,13 +45,24 @@ const VersionGroupDetailModal: FC<VersionGroupDetailModalProps> = ({
       visible={visible}
       onRequestClose={onRequestClose}>
       <View style={styles.centeredView}>
-        <View style={styles.modalView}>
-          <Text style={styles.modalText}>{description}</Text>
+        <View
+          style={[
+            styles.modalView,
+            {backgroundColor: theme.background, borderColor: theme.border},
+          ]}>
+          <Text style={[styles.modalText, {color: theme.text}]}>
+            {description}
+          </Text>
 
           <ScrollView>
             {!!values &&
               values.map((val, i) => (
-                <View style={styles.valueContainer} key={`index_${i}`}>
+                <View
+                  style={[
+                    styles.valueContainer,
+                    {borderBottomColor: theme.border},
+                  ]}
+                  key={`index_${i}`}>
                   <RowDescription
                     description="Level yang Dipelajari pada"
                     value={val?.level_learned_at}
@@ -88,7 +103,6 @@ const styles = StyleSheet.create({
   },
   modalView: {
     margin: 20,
-    backgroundColor: 'white',
     borderRadius: 20,
     paddingVertical: 35,
     paddingHorizontal: 20,
@@ -102,11 +116,11 @@ const styles = StyleSheet.create({
     elevation: 5,
     width: '90%',
     height: WINDOW_HEIGHT / 1.3,
+    borderWidth: 1,
   },
   modalText: {
     textAlign: 'center',
     fontWeight: '500',
-    color: 'black',
     marginBottom: 10,
     fontSize: 16,
   },
@@ -126,7 +140,6 @@ const styles = StyleSheet.create({
   valueContainer: {
     marginBottom: 10,
     borderBottomWidth: 1,
-    borderBottomColor: 'black',
   },
   singleHead: {width: 80, height: 40, backgroundColor: '#c8e1ff'},
   head: {flex: 1, backgroundColor: '#c8e1ff'},

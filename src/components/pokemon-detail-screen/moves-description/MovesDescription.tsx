@@ -1,13 +1,17 @@
 import React, {FC, useMemo, useState} from 'react';
-import {Row, Rows, Table} from 'react-native-table-component';
-import {Modal, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import VersionGroupDetailModal from './VersionGroupDetailModal';
+import {Row, Rows, Table} from 'react-native-table-component';
+import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {themeSelector} from 'services/global-state/theme';
+import {useRecoilValue} from 'recoil';
 
 type MovesDescriptionProps = {
   moves: Moves[];
 };
 
 const MovesDescription: FC<MovesDescriptionProps> = ({moves}) => {
+  const theme = useRecoilValue(themeSelector);
+
   const [modalVisible, setModalVisible] = useState(false);
   const [description, setDescription] = useState('');
   const [value, setValue] = useState(null);
@@ -39,7 +43,7 @@ const MovesDescription: FC<MovesDescriptionProps> = ({moves}) => {
 
   return (
     <View style={{marginTop: 10}}>
-      <Text style={styles.title}>Pergerakan</Text>
+      <Text style={[styles.title, {color: theme.text}]}>Pergerakan</Text>
 
       <Table borderStyle={{borderWidth: 2, borderColor: '#c8e1ff'}}>
         <Row
@@ -50,7 +54,7 @@ const MovesDescription: FC<MovesDescriptionProps> = ({moves}) => {
         />
         <Rows
           data={tableData}
-          textStyle={styles.tableData}
+          textStyle={[styles.tableData, {color: theme.text}]}
           flexArr={[1, 4, 2]}
           heightArr={Array.from({length: tableData.length}, () => 50)}
         />
@@ -75,7 +79,7 @@ export default MovesDescription;
 const styles = StyleSheet.create({
   head: {height: 40, backgroundColor: '#f1f8ff'},
   tableData: {marginVertical: 5, marginLeft: 5, textAlign: 'center'},
-  title: {fontWeight: 'bold', color: 'black', marginBottom: 5},
+  title: {fontWeight: 'bold', marginBottom: 5},
   btn: {
     width: 58,
     backgroundColor: 'orange',

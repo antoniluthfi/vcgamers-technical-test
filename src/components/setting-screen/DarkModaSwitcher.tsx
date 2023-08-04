@@ -13,9 +13,9 @@ const DarkModaSwitcher = () => {
   };
 
   return (
-    <View style={styles.container}>
-      <Icon name={isDarkMode ? 'moon' : 'sunny'} size={30} color={theme.textColor} />
-      <Text style={[styles.title, {color: theme.textColor}]}>Dark Mode</Text>
+    <View style={[styles.container, {borderBottomColor: theme.border}]}>
+      <Icon name={isDarkMode ? 'moon' : 'sunny'} size={30} color={theme.text} />
+      <Text style={[styles.title, {color: theme.text}]}>Dark Mode</Text>
       <Switch onValueChange={toggleDarkMode} value={isDarkMode} />
     </View>
   );
@@ -29,7 +29,6 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     borderBottomWidth: 1,
-    borderBottomColor: 'black',
     paddingVertical: 10,
   },
   title: {fontSize: 16, fontWeight: 'bold'},

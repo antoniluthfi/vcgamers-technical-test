@@ -5,7 +5,9 @@ import React, {useEffect, useState} from 'react';
 import SearchInput from 'components/search-input/SearchInput';
 import {FlatList, TouchableOpacity, View} from 'react-native';
 import {StackNavigationProp} from '@react-navigation/stack';
+import {themeSelector} from 'services/global-state/theme';
 import {useNavigation} from '@react-navigation/native';
+import {useRecoilValue} from 'recoil';
 import useFetchData, {
   Result,
 } from 'components/pokemon-list-screen/hooks/useFetchData';
@@ -13,7 +15,9 @@ import useFetchData, {
 const PokemonListScreen = () => {
   const navigation =
     useNavigation<StackNavigationProp<MainStackNavigatorParamList>>();
+  const theme = useRecoilValue(themeSelector);
   const {data, loading, getData, handleGetMoreData} = useFetchData();
+
   const [keyword, setKeyword] = useState('');
 
   const renderItem = ({item}: {item: Result}) => {
@@ -31,7 +35,7 @@ const PokemonListScreen = () => {
     navigation.setOptions({
       headerRight: () => (
         <TouchableOpacity onPress={getData} style={{marginRight: 20}}>
-          <Icon name="reload" size={30} color="black" />
+          <Icon name="reload" size={30} color={theme.text} />
         </TouchableOpacity>
       ),
     });
@@ -39,7 +43,7 @@ const PokemonListScreen = () => {
 
   if (loading) return <Loading />;
   return (
-    <View style={{flex: 1}}>
+    <View style={{flex: 1, backgroundColor: theme.background}}>
       <View style={{padding: 20}}>
         <SearchInput onChangeText={setKeyword} />
       </View>

@@ -9,19 +9,22 @@ import useFetchData from 'components/pokemon-detail-screen/hooks/useFetchData';
 import {RouteProp, useNavigation, useRoute} from '@react-navigation/native';
 import {ScrollView, TouchableOpacity, View} from 'react-native';
 import {StackNavigationProp} from '@react-navigation/stack';
+import {themeSelector} from 'services/global-state/theme';
+import {useRecoilValue} from 'recoil';
 
 const PokemonDetailScreen = () => {
   const route =
     useRoute<RouteProp<MainStackNavigatorParamList, 'PokemonDetail'>>();
   const navigation =
     useNavigation<StackNavigationProp<MainStackNavigatorParamList>>();
+  const theme = useRecoilValue(themeSelector);
   const {data, loading, getData} = useFetchData(route.params.name);
 
   useEffect(() => {
     navigation.setOptions({
       headerRight: () => (
         <TouchableOpacity onPress={getData}>
-          <Icon name="reload" size={30} color="black" />
+          <Icon name="reload" size={30} color={theme.text} />
         </TouchableOpacity>
       ),
     });
@@ -29,13 +32,14 @@ const PokemonDetailScreen = () => {
 
   if (loading) return <Loading />;
   return (
-    <ScrollView contentContainerStyle={{padding: 20}}>
+    <ScrollView
+      contentContainerStyle={{padding: 20, backgroundColor: theme.background}}>
       <View
         style={{
-          backgroundColor: 'white',
+          backgroundColor: theme.background,
           borderWidth: 1,
           borderRadius: 7,
-          borderColor: 'grey',
+          borderColor: theme.border,
           elevation: 4,
           paddingHorizontal: '5%',
           paddingVertical: 20,

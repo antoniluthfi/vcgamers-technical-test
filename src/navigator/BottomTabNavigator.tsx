@@ -3,17 +3,20 @@ import PokemonListScreen from 'screens/PokemonListScreen';
 import React from 'react';
 import SettingScreen from 'screens/SettingScreen';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import {themeSelector} from 'services/global-state/theme';
+import {useRecoilValue} from 'recoil';
 
 const BottomTabNavigator = () => {
   const Tab = createBottomTabNavigator();
+  const theme = useRecoilValue(themeSelector);
 
   return (
     <Tab.Navigator
       screenOptions={({route}) => ({
         headerStyle: {
-          backgroundColor: 'orange',
+          backgroundColor: `${theme.primary}`,
         },
-        tabBarIcon: ({focused, color, size}) => {
+        tabBarIcon: ({focused, size}) => {
           let iconName: string;
 
           if (route.name === 'Home') {
@@ -23,17 +26,27 @@ const BottomTabNavigator = () => {
           }
 
           // You can return any component that you like here!
-          return <Icon name={iconName} size={size} color={color} />;
+          return <Icon name={iconName} size={size} color={theme.tabIcon} />;
         },
-        tabBarActiveTintColor: 'tomato',
+        tabBarActiveTintColor: theme.tabIcon,
         tabBarInactiveTintColor: 'gray',
+        tabBarStyle: {
+          backgroundColor: theme.background,
+        },
       })}>
       <Tab.Screen
         name="Home"
         component={PokemonListScreen}
-        options={{headerTitle: 'Daftar Nama Pokemon'}}
+        options={{
+          headerTitle: 'Daftar Nama Pokemon',
+          headerTintColor: theme.text,
+        }}
       />
-      <Tab.Screen name="Settings" component={SettingScreen} />
+      <Tab.Screen
+        name="Settings"
+        component={SettingScreen}
+        options={{headerTintColor: theme.text}}
+      />
     </Tab.Navigator>
   );
 };

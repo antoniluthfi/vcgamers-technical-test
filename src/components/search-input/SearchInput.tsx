@@ -1,6 +1,8 @@
-import React, {FC, useState} from 'react';
-import {TextInput, TouchableOpacity, View, StyleSheet} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
+import React, {FC, useState} from 'react';
+import {StyleSheet, TextInput, TouchableOpacity, View} from 'react-native';
+import {themeSelector} from 'services/global-state/theme';
+import {useRecoilValue} from 'recoil';
 
 type SearchInputProps = {
   onChangeText: (text: string) => void;
@@ -8,11 +10,13 @@ type SearchInputProps = {
 
 const SearchInput: FC<SearchInputProps> = ({onChangeText}) => {
   const [keyword, setKeyword] = useState('');
+  const theme = useRecoilValue(themeSelector);
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, {borderColor: theme.border}]}>
       <TextInput
-        style={{flexBasis: '90%'}}
+        style={{flexBasis: '90%', color: theme.text}}
+        placeholderTextColor={theme.placeholder}
         placeholder="Cari data ..."
         value={keyword}
         onChangeText={text => {
@@ -21,7 +25,7 @@ const SearchInput: FC<SearchInputProps> = ({onChangeText}) => {
         }}
       />
       <TouchableOpacity>
-        <Icon name="search" size={30} color="black" />
+        <Icon name="search" size={30} color={theme.text} />
       </TouchableOpacity>
     </View>
   );
@@ -32,7 +36,6 @@ export default SearchInput;
 const styles = StyleSheet.create({
   container: {
     borderWidth: 1,
-    borderColor: 'grey',
     borderRadius: 5,
     paddingHorizontal: 5,
     flexDirection: 'row',

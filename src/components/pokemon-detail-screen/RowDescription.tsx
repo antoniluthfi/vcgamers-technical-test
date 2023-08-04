@@ -1,5 +1,7 @@
 import React, {FC} from 'react';
 import {Text, View, StyleSheet} from 'react-native';
+import {themeSelector} from 'services/global-state/theme';
+import {useRecoilValue} from 'recoil';
 
 type RowDescriptionProps = {
   description: string;
@@ -12,16 +14,18 @@ const RowDescription: FC<RowDescriptionProps> = ({
   descriptionWidth,
   value,
 }) => {
+  const theme = useRecoilValue(themeSelector);
+
   return (
     <View style={styles.container}>
       <Text
         style={[
           styles.description,
-          {flexBasis: (descriptionWidth as any) || '20%'},
+          {flexBasis: (descriptionWidth as any) || '20%', color: theme.text},
         ]}>
         {description}
       </Text>
-      <Text style={styles.value}>: {value}</Text>
+      <Text style={{color: theme.text}}>: {value}</Text>
     </View>
   );
 };
@@ -33,6 +37,5 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     width: '100%',
   },
-  description: {flexBasis: '20%', fontWeight: 'bold', color: 'black'},
-  value: {color: 'black', flexWrap: 'wrap'},
+  description: {flexBasis: '20%', fontWeight: 'bold'},
 });
