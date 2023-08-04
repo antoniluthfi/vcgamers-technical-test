@@ -1,4 +1,4 @@
-import DarkModaSwitcher from 'components/setting-screen/DarkModaSwitcher';
+import DarkModeSwitcher from 'components/setting-screen/DarkModeSwitcher';
 import LanguageSwitcher from 'components/setting-screen/LanguageSwitcher';
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
@@ -10,7 +10,7 @@ const SettingScreen = () => {
 
   return (
     <View style={[styles.container, {backgroundColor: theme.accent}]}>
-      <DarkModaSwitcher />
+      <DarkModeSwitcher />
       <LanguageSwitcher />
     </View>
   );
