@@ -9,6 +9,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
+import { useTranslation } from 'react-i18next';
 
 type SpritesDescriptionProps = {
   sprites: Sprites;
@@ -16,39 +17,40 @@ type SpritesDescriptionProps = {
 
 const SpritesDescription: FC<SpritesDescriptionProps> = ({sprites}) => {
   const theme = useRecoilValue(themeSelector);
+  const {t} = useTranslation();
   const [modalVisible, setModalVisible] = useState(false);
   const [description, setDescription] = useState('');
   const [value, setValue] = useState('');
 
   const data = [
     {
-      title: 'Kembali Default',
+      title: t('back_default'),
       onPress: () => {
-        setDescription('Kembali Default');
+        setDescription(t('back_default'));
         setValue(sprites?.back_default);
         setModalVisible(true);
       },
     },
     {
-      title: 'Kembali Mengkilap',
+      title: t('back_shiny'),
       onPress: () => {
-        setDescription('Kembali Mengkilap');
+        setDescription(t('back_shiny'));
         setValue(sprites?.back_shiny);
         setModalVisible(true);
       },
     },
     {
-      title: 'Default Depan',
+      title: t('front_default'),
       onPress: () => {
-        setDescription('Default Depan');
+        setDescription(t('front_default'));
         setValue(sprites?.front_default);
         setModalVisible(true);
       },
     },
     {
-      title: 'Depan Mengkilap',
+      title: t('front_shiny'),
       onPress: () => {
-        setDescription('Depan Mengkilap');
+        setDescription(t('front_shiny'));
         setValue(sprites?.front_shiny);
         setModalVisible(true);
       },
@@ -57,7 +59,7 @@ const SpritesDescription: FC<SpritesDescriptionProps> = ({sprites}) => {
 
   return (
     <View>
-      <Text style={[styles.title, {color: theme.text}]}>Sprites</Text>
+      <Text style={[styles.title, {color: theme.text}]}>{t('sprites')}</Text>
 
       {data.map((d, i) => (
         <View style={styles.descriptionContainer} key={`index_${i}`}>
@@ -66,7 +68,7 @@ const SpritesDescription: FC<SpritesDescriptionProps> = ({sprites}) => {
           </Text>
           <TouchableOpacity onPress={d.onPress}>
             <Text style={{color: theme.text}}>
-              : <Text style={styles.value}>Lihat Gambar</Text>
+              : <Text style={styles.value}>{t('see_picture')}</Text>
             </Text>
           </TouchableOpacity>
         </View>

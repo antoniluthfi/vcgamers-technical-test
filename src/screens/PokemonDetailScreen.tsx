@@ -11,6 +11,7 @@ import {ScrollView, StyleSheet, TouchableOpacity, View} from 'react-native';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {themeSelector} from 'services/global-state/theme';
 import {useRecoilValue} from 'recoil';
+import {useTranslation} from 'react-i18next';
 
 const PokemonDetailScreen = () => {
   const route =
@@ -19,6 +20,7 @@ const PokemonDetailScreen = () => {
     useNavigation<StackNavigationProp<MainStackNavigatorParamList>>();
   const theme = useRecoilValue(themeSelector);
   const {data, loading, getData} = useFetchData(route.params.name);
+  const {t} = useTranslation();
 
   useEffect(() => {
     navigation.setOptions({
@@ -47,9 +49,9 @@ const PokemonDetailScreen = () => {
             borderColor: theme.border,
           },
         ]}>
-        <RowDescription description="Name" value={data?.name} />
-        <RowDescription description="Tinggi" value={data?.height} />
-        <RowDescription description="Berat" value={data?.weight} />
+        <RowDescription description={t('name')} value={data?.name} />
+        <RowDescription description={t('height')} value={data?.height} />
+        <RowDescription description={t('weight')} value={data?.weight} />
         <SpritesDescription sprites={data?.sprites} />
         <TypesDescription types={data?.types} />
         <MovesDescription
@@ -69,7 +71,7 @@ const styles = StyleSheet.create({
     flexGrow: 1,
     paddingHorizontal: 20,
     paddingTop: 20,
-    paddingBottom: 70
+    paddingBottom: 70,
   },
   card: {
     borderWidth: 1,

@@ -4,6 +4,7 @@ import {Row, Rows, Table} from 'react-native-table-component';
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {themeSelector} from 'services/global-state/theme';
 import {useRecoilValue} from 'recoil';
+import {useTranslation} from 'react-i18next';
 
 type MovesDescriptionProps = {
   moves: Moves[];
@@ -11,11 +12,12 @@ type MovesDescriptionProps = {
 
 const MovesDescription: FC<MovesDescriptionProps> = ({moves}) => {
   const theme = useRecoilValue(themeSelector);
+  const {t} = useTranslation();
 
   const [modalVisible, setModalVisible] = useState(false);
   const [description, setDescription] = useState('');
   const [value, setValue] = useState(null);
-  const tableHead = ['No', 'Nama', 'Aksi'];
+  const tableHead = ['No', t('name'), t('action')];
 
   const element = (data: Moves, index: number) => (
     <TouchableOpacity

@@ -4,11 +4,13 @@ import React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {themeSelector} from 'services/global-state/theme';
 import {useRecoilValue} from 'recoil';
+import {useTranslation} from 'react-i18next';
 
 const Stack = createNativeStackNavigator<MainStackNavigatorParamList>();
 
 const MainStackNavigator = () => {
   const theme = useRecoilValue(themeSelector);
+  const {t} = useTranslation();
 
   return (
     <Stack.Navigator
@@ -26,7 +28,10 @@ const MainStackNavigator = () => {
       <Stack.Screen
         name="PokemonDetail"
         component={PokemonDetailScreen}
-        options={{headerTintColor: theme.text}}
+        options={{
+          headerTintColor: theme.text,
+          headerTitle: t('pokemon_detail'),
+        }}
       />
     </Stack.Navigator>
   );

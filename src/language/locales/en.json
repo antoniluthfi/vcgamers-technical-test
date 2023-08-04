@@ -1,4 +1,23 @@
 {
     "change_language": "Change Language",
-    "dark_mode": "Dark Mode"
+    "dark_mode": "Dark Mode",
+    "home": "Home",
+    "settings": "Settings",
+    "pokemon_name_list": "Pokemon Name List",
+    "search_data": "Search data ...",
+    "pokemon_detail": "Pokemon Detail",
+    "name": "Name",
+    "height": "Height",
+    "weight": "Weight",
+    "sprites": "Sprites",
+    "back_default": "Back Default",
+    "back_shiny": "Back Shiny",
+    "front_default": "Front Default",
+    "front_shiny": "Front Shiny",
+    "see_picture": "See Picture",
+    "types": "Types",
+    "action": "Action",
+    "level_learned_at": "Level Learned at",
+    "version_group": "Version Group",
+    "move_learn_method": "Move Learn Method"
 }

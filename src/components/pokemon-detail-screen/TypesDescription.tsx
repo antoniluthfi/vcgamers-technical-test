@@ -3,6 +3,7 @@ import {Row, Rows, Table} from 'react-native-table-component';
 import {StyleSheet, Text, View} from 'react-native';
 import {themeSelector} from 'services/global-state/theme';
 import {useRecoilValue} from 'recoil';
+import {useTranslation} from 'react-i18next';
 
 type TypesDescriptionProps = {
   types: Types[];
@@ -10,8 +11,9 @@ type TypesDescriptionProps = {
 
 const TypesDescription: FC<TypesDescriptionProps> = ({types}) => {
   const theme = useRecoilValue(themeSelector);
+  const {t} = useTranslation();
 
-  const tableHead = ['No', 'Nama', 'Slot'];
+  const tableHead = ['No', t('name'), 'Slot'];
   const tableData = useMemo(() => {
     if (types?.length) {
       return types.map((type, i) => [i + 1, type?.type?.name, type?.slot]);
@@ -22,7 +24,7 @@ const TypesDescription: FC<TypesDescriptionProps> = ({types}) => {
 
   return (
     <View>
-      <Text style={[styles.title, {color: theme.text}]}>Jenis</Text>
+      <Text style={[styles.title, {color: theme.text}]}>{t('types')}</Text>
 
       <Table borderStyle={{borderWidth: 2, borderColor: theme.tableBorder}}>
         <Row

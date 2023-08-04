@@ -1,4 +1,8 @@
 import React, {FC} from 'react';
+import RowDescription from '../RowDescription';
+import {themeSelector} from 'services/global-state/theme';
+import {useRecoilValue} from 'recoil';
+import {useTranslation} from 'react-i18next';
 import {
   Dimensions,
   Modal,
@@ -8,16 +12,6 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import {
-  Cell,
-  Col,
-  Cols,
-  Table,
-  TableWrapper,
-} from 'react-native-table-component';
-import RowDescription from '../RowDescription';
-import {themeSelector} from 'services/global-state/theme';
-import {useRecoilValue} from 'recoil';
 
 type VersionGroupDetailModalProps = {
   visible: boolean;
@@ -36,6 +30,7 @@ const VersionGroupDetailModal: FC<VersionGroupDetailModalProps> = ({
   values,
 }) => {
   const theme = useRecoilValue(themeSelector);
+  const {t} = useTranslation();
 
   return (
     <Modal
@@ -64,17 +59,17 @@ const VersionGroupDetailModal: FC<VersionGroupDetailModalProps> = ({
                   ]}
                   key={`index_${i}`}>
                   <RowDescription
-                    description="Level yang Dipelajari pada"
+                    description={t('level_learned_at')}
                     value={val?.level_learned_at}
                     descriptionWidth="60%"
                   />
                   <RowDescription
-                    description="Grup Versi"
+                    description={t('version_group')}
                     value={val?.version_group?.name}
                     descriptionWidth="60%"
                   />
                   <RowDescription
-                    description="Metode Belajar Bergerak"
+                    description={t('move_learn_method')}
                     value={val?.move_learn_method?.name}
                     descriptionWidth="60%"
                   />

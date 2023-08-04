@@ -5,17 +5,20 @@ import SettingScreen from 'screens/SettingScreen';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {themeSelector} from 'services/global-state/theme';
 import {useRecoilValue} from 'recoil';
+import {useTranslation} from 'react-i18next';
+
+const Tab = createBottomTabNavigator();
 
 const BottomTabNavigator = () => {
-  const Tab = createBottomTabNavigator();
   const theme = useRecoilValue(themeSelector);
+  const {t} = useTranslation();
 
   return (
     <Tab.Navigator
       screenOptions={({route}) => ({
         headerStyle: {
           backgroundColor: theme.primary,
-      },
+        },
         tabBarIcon: ({focused, size}) => {
           let iconName: string;
 
@@ -38,14 +41,15 @@ const BottomTabNavigator = () => {
         name="Home"
         component={PokemonListScreen}
         options={{
-          headerTitle: 'Daftar Nama Pokemon',
+          headerTitle: t('pokemon_name_list'),
           headerTintColor: theme.text,
+          tabBarLabel: t('home'),
         }}
       />
       <Tab.Screen
         name="Settings"
         component={SettingScreen}
-        options={{headerTintColor: theme.text}}
+        options={{headerTintColor: theme.text, tabBarLabel: t('settings')}}
       />
     </Tab.Navigator>
   );

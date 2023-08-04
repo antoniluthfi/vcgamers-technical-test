@@ -1,4 +1,23 @@
 {
     "change_language": "Ganti Bahasa",
-    "dark_mode": "Mode Gelap"
+    "dark_mode": "Mode Gelap",
+    "home": "Beranda",
+    "settings": "Pengaturan",
+    "pokemon_name_list": "Daftar Nama Pokemon",
+    "search_data": "Cari data ...",
+    "pokemon_detail": "Detail Pokemon",
+    "name": "Nama",
+    "height": "Tinggi",
+    "weight": "Berat",
+    "sprites": "Sprites",
+    "back_default": "Kembali Default",
+    "back_shiny": "Kembali Mengkilap",
+    "front_default": "Default Depan",
+    "front_shiny": "Depan Mengkilap",
+    "see_picture": "Lihat Gambar",
+    "types": "Jenis",
+    "action": "Aksi",
+    "level_learned_at": "Level yang Dipelajari pada",
+    "version_group": "Grup Versi",
+    "move_learn_method": "Metode Belajar Bergerak"
 }

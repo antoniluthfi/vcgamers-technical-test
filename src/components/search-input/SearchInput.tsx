@@ -3,6 +3,7 @@ import React, {FC, useState} from 'react';
 import {StyleSheet, TextInput, TouchableOpacity, View} from 'react-native';
 import {themeSelector} from 'services/global-state/theme';
 import {useRecoilValue} from 'recoil';
+import {useTranslation} from 'react-i18next';
 
 type SearchInputProps = {
   onChangeText: (text: string) => void;
@@ -11,13 +12,14 @@ type SearchInputProps = {
 const SearchInput: FC<SearchInputProps> = ({onChangeText}) => {
   const [keyword, setKeyword] = useState('');
   const theme = useRecoilValue(themeSelector);
+  const {t} = useTranslation();
 
   return (
     <View style={[styles.container, {borderColor: theme.border}]}>
       <TextInput
         style={{flexBasis: '90%', color: theme.text}}
         placeholderTextColor={theme.placeholder}
-        placeholder="Cari data ..."
+        placeholder={t('search_data')}
         value={keyword}
         onChangeText={text => {
           setKeyword(text);
