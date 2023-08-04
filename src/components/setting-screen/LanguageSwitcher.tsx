@@ -57,10 +57,12 @@ const LanguageSwitcher = () => {
                   },
                 ]}
                 onPress={() => changeLanguage(opt.value as 'id' | 'en')}>
-                <Text style={styles.modalText}>{opt.label}</Text>
+                <Text style={[styles.modalText, {color: theme.text}]}>
+                  {opt.label}
+                </Text>
 
                 {language === opt.value && (
-                  <Icon name="checkmark-circle" size={20} color="black" />
+                  <Icon name="checkmark-circle" size={20} color={theme.text} />
                 )}
               </TouchableOpacity>
             ))}
