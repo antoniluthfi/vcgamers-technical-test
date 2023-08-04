@@ -14,8 +14,9 @@ const MainStackNavigator = () => {
     <Stack.Navigator
       screenOptions={{
         headerStyle: {
-          backgroundColor: `${theme.primary}`,
+          backgroundColor: theme.primary,
         },
+        navigationBarColor: theme.tabBackground,
       }}>
       <Stack.Screen
         name="BottomTab"

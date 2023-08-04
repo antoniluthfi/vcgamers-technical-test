@@ -7,7 +7,7 @@ import SpritesDescription from 'components/pokemon-detail-screen/SpritesDescript
 import TypesDescription from 'components/pokemon-detail-screen/TypesDescription';
 import useFetchData from 'components/pokemon-detail-screen/hooks/useFetchData';
 import {RouteProp, useNavigation, useRoute} from '@react-navigation/native';
-import {ScrollView, TouchableOpacity, View} from 'react-native';
+import {ScrollView, StyleSheet, TouchableOpacity, View} from 'react-native';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {themeSelector} from 'services/global-state/theme';
 import {useRecoilValue} from 'recoil';
@@ -33,19 +33,20 @@ const PokemonDetailScreen = () => {
   if (loading) return <Loading />;
   return (
     <ScrollView
-      contentContainerStyle={{padding: 20, backgroundColor: theme.background}}>
+      contentContainerStyle={[
+        styles.container,
+        {
+          backgroundColor: theme.accent,
+        },
+      ]}>
       <View
-        style={{
-          backgroundColor: theme.background,
-          borderWidth: 1,
-          borderRadius: 7,
-          borderColor: theme.border,
-          elevation: 4,
-          paddingHorizontal: '5%',
-          paddingVertical: 20,
-          shadowColor: 'rgba(0, 0, 0, 0.25)',
-          width: '100%',
-        }}>
+        style={[
+          styles.card,
+          {
+            backgroundColor: theme.background,
+            borderColor: theme.border,
+          },
+        ]}>
         <RowDescription description="Name" value={data?.name} />
         <RowDescription description="Tinggi" value={data?.height} />
         <RowDescription description="Berat" value={data?.weight} />
@@ -62,3 +63,21 @@ const PokemonDetailScreen = () => {
 };
 
 export default PokemonDetailScreen;
+
+const styles = StyleSheet.create({
+  container: {
+    flexGrow: 1,
+    paddingHorizontal: 20,
+    paddingTop: 20,
+    paddingBottom: 70
+  },
+  card: {
+    borderWidth: 1,
+    borderRadius: 7,
+    elevation: 4,
+    paddingHorizontal: '5%',
+    paddingVertical: 20,
+    shadowColor: 'rgba(0, 0, 0, 0.25)',
+    width: '100%',
+  },
+});

@@ -14,8 +14,8 @@ const BottomTabNavigator = () => {
     <Tab.Navigator
       screenOptions={({route}) => ({
         headerStyle: {
-          backgroundColor: `${theme.primary}`,
-        },
+          backgroundColor: theme.primary,
+      },
         tabBarIcon: ({focused, size}) => {
           let iconName: string;
 
@@ -31,7 +31,7 @@ const BottomTabNavigator = () => {
         tabBarActiveTintColor: theme.tabIcon,
         tabBarInactiveTintColor: 'gray',
         tabBarStyle: {
-          backgroundColor: theme.background,
+          backgroundColor: theme.tabBackground,
         },
       })}>
       <Tab.Screen

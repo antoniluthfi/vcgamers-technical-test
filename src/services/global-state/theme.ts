@@ -11,6 +11,7 @@ const lightTheme = {
   headerTitle: '#FAFAFA',
   border: '#bdbdbd',
   tabIcon: '#ff9800',
+  tabBackground: '#ffffff',
   tableBorder: '#c8e1ff'
 };
 
@@ -25,6 +26,7 @@ const darkTheme = {
   headerTitle: '#FFFFFF',
   border: '#9e9e9e',
   tabIcon: '#FFFFFF',
+  tabBackground: '#121212',
   tableBorder: '#9e9e9e'
 };
 
